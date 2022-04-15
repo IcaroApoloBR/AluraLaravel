@@ -2,16 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Anime;
 use Illuminate\Http\Request;
 
 class AnimesController extends Controller
 {
     public function index() {
-        $animes = [
-            'Death Note',
-            'Jujutsu Kaisen',
-            'Demon Slayer'
-        ];
+        $animes = Anime::all();
     
        return view('animes.index')->with('animes', $animes);
     }
@@ -19,4 +16,9 @@ class AnimesController extends Controller
     public function create() {
         return view('animes.create');
     }
-};
+
+    public function store(Request $request) {
+        $anime = Anime::create($request->all());
+        echo "Anime with id {$anime->id} created: {$anime->name}";
+    }
+}

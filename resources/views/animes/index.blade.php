@@ -9,7 +9,7 @@
 
     <ul class="list-group">
         @foreach ($animes as $anime)
-            <li class="list-group-item"><?= $anime; ?></li>
+            <li class="list-group-item">{{ $anime->name }}</li>
         @endforeach
     </ul>
 @endsection
