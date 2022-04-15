@@ -13,12 +13,10 @@ class AnimesController extends Controller
             'Demon Slayer'
         ];
     
-        $html = "<ul>";
-        foreach($animes as $anime) {
-            $html .= "<li>$anime</li>";
-        }
-        $html .= "</ul>";
-    
-        return $html;
+       return view('animes.index')->with('animes', $animes);
+    }
+
+    public function create() {
+        return view('animes.create');
     }
 };
