@@ -21,7 +21,7 @@
                     onsubmit="return confirm('Are you sure you want to delete?')" >
                     @csrf
                     @method('DELETE')
-                    <button class="btn btn-danger btn-sm">Delete</button>
+                    <button class="btn btn-danger btn-sm"><i class="fa-solid fa-trash-can"></i></button>
                 </form>
             </li>
         @endforeach

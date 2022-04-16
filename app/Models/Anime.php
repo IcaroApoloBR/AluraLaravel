@@ -9,4 +9,8 @@ class Anime extends Model
 {
     public $timestamps = false;
     protected $fillable = ['name'];
+
+    public function seasons() {
+        return $this->hasMany(Season::class);
+    }
 }
