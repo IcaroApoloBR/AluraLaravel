@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('title')
-    Anime List
+    My Anime List
 @endsection
 
 @section('content')
