@@ -9,7 +9,7 @@
 </head>
 <body>
     <div class="container">
-        <div class="jumbotron">
+        <div class="mt-4 p-5 bg-primary text-white rounded">
             <h1>@yield('title')</h1>
         </div>
 
