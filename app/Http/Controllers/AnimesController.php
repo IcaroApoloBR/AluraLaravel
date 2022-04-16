@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AnimesFormRequest;
 use App\Models\Anime;
 use Illuminate\Http\Request;
 
@@ -20,7 +21,7 @@ class AnimesController extends Controller
         return view('animes.create');
     }
 
-    public function store(Request $request) {
+    public function store(AnimesFormRequest $request) {
 
         $anime = Anime::create($request->all());
         $request = session()

@@ -16,12 +16,12 @@
 
     <ul class="list-group">
         @foreach ($animes as $anime)
-            <li class="list-group-item">{{ $anime->name }}
+            <li class="list-group-item d-flex justify-content-between align-items-center">{{ $anime->name }}
                 <form method="post" action="/animes/{{$anime->id}}"
                     onsubmit="return confirm('Tem certeza?')" >
                     @csrf
                     @method('DELETE')
-                    <button class="btn btn-danger">Delete</button>
+                    <button class="btn btn-danger btn-sm">Delete</button>
                 </form>
             </li>
         @endforeach
