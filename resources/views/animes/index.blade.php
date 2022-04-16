@@ -18,7 +18,7 @@
         @foreach ($animes as $anime)
             <li class="list-group-item d-flex justify-content-between align-items-center">{{ $anime->name }}
                 <form method="post" action="/animes/{{$anime->id}}"
-                    onsubmit="return confirm('Tem certeza?')" >
+                    onsubmit="return confirm('Are you sure you want to delete?')" >
                     @csrf
                     @method('DELETE')
                     <button class="btn btn-danger btn-sm">Delete</button>

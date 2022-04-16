@@ -13,7 +13,7 @@ class AnimesController extends Controller
         $animes = Anime::query()->orderBy('name')->get();
         $message = $request->session()->get('message');
     
-       return view('animes.index')->with('animes', $animes, 'message', $message);
+       return view('animes.index', compact('animes', 'message'));
     }
 
     public function create() {
@@ -24,20 +24,14 @@ class AnimesController extends Controller
     public function store(AnimesFormRequest $request) {
 
         $anime = Anime::create($request->all());
-        $request = session()
-            ->flash(
-                'message',"Anime {$anime->id} created successfully {$anime->name}."
-            );
+        $request->session()->flash('message',"{$anime->name} created successfully .");
 
         return redirect('/animes');
     }
 
     public function destroy(Request $request) {
         Anime::destroy($request->id);
-        $request = session()
-        ->flash(
-            'message',"Anime removido com sucesso."
-        );
+        $request->session()->flash('message',"Anime removed successfully.");
 
         return redirect('/animes');
     }
