@@ -23,8 +23,17 @@ class AnimesController extends Controller
 
     public function store(AnimesFormRequest $request) {
 
-        $anime = Anime::create($request->all());
-        $request->session()->flash('message',"{$anime->name} created successfully .");
+        $anime = Anime::create(['name' => $request->name]);
+        $qtdSeasons = $request->qtd_seasons;
+        for ($i = 1; $i <= $qtdSeasons; $i++) {
+            $season = $anime->seasons()->create(['number' => $i]);
+
+            for ($j = 1; $j <= $request->episodes_season; $j++) {
+                $season->episodes()->create(['number' => $j]);
+            }
+        }
+
+        $request->session()->flash('message',"Anime {$anime->name} with seasons and episodes created successfully .");
 
         return redirect('/animes');
     }
