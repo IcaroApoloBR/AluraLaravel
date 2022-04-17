@@ -16,13 +16,20 @@
 
     <ul class="list-group">
         @foreach ($animes as $anime)
-            <li class="list-group-item d-flex justify-content-between align-items-center">{{ $anime->name }}
-                <form method="post" action="/animes/{{$anime->id}}"
-                    onsubmit="return confirm('Are you sure you want to delete?')" >
-                    @csrf
-                    @method('DELETE')
-                    <button class="btn btn-danger btn-sm"><i class="fa-solid fa-trash-can"></i></button>
-                </form>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                
+                {{ $anime->name }}
+                <span class="d-flex">
+                    <a href="/animes/{{ $anime->id }}/temporadas" class="btn btn-info btn-sm mr-2">
+                        <i class="fas fa-external-link-alt"></i>
+                    </a>
+                    <form method="post" action="/animes/{{$anime->id}}"
+                        onsubmit="return confirm('Are you sure you want to delete?')" >
+                        @csrf
+                        @method('DELETE')
+                        <button class="btn btn-danger btn-sm"><i class="fa-solid fa-trash-can"></i></button>
+                    </form>
+                </span>
             </li>
         @endforeach
     </ul>
