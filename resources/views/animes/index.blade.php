@@ -20,14 +20,14 @@
                 
                 {{ $anime->name }}
                 <span class="d-flex">
-                    <a href="/animes/{{ $anime->id }}/temporadas" class="btn btn-info btn-sm mr-2">
+                    <a href="/animes/{{ $anime->id }}/temporadas" class="btn btn-info btn-sm m-2">
                         <i class="fas fa-external-link-alt"></i>
                     </a>
                     <form method="post" action="/animes/{{$anime->id}}"
                         onsubmit="return confirm('Are you sure you want to delete?')" >
                         @csrf
                         @method('DELETE')
-                        <button class="btn btn-danger btn-sm"><i class="fa-solid fa-trash-can"></i></button>
+                        <button class="btn btn-danger btn-sm m-2"><i class="fa-solid fa-trash-can"></i></button>
                     </form>
                 </span>
             </li>

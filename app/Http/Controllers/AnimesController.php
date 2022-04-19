@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\AnimesFormRequest;
 use App\Models\Anime;
+use App\Models\Episode;
+use App\Models\Season;
+use App\Services\CreateAnime;
 use Illuminate\Http\Request;
 
 class AnimesController extends Controller
@@ -21,17 +24,15 @@ class AnimesController extends Controller
         return view('animes.create');
     }
 
-    public function store(AnimesFormRequest $request) {
+    public function store(
+        AnimesFormRequest $request,
+        CreateAnime $createAnime) {
 
-        $anime = Anime::create(['name' => $request->name]);
-        $qtdSeasons = $request->qtd_seasons;
-        for ($i = 1; $i <= $qtdSeasons; $i++) {
-            $season = $anime->seasons()->create(['number' => $i]);
-
-            for ($j = 1; $j <= $request->episodes_season; $j++) {
-                $season->episodes()->create(['number' => $j]);
-            }
-        }
+        $anime = $createAnime->createAnime(
+            $request->name,
+            $request->qtd_seasons,
+            $request->episodes_season
+        );
 
         $request->session()->flash('message',"Anime {$anime->name} with seasons and episodes created successfully .");
 
@@ -39,9 +40,18 @@ class AnimesController extends Controller
     }
 
     public function destroy(Request $request) {
-        Anime::destroy($request->id);
-        $request->session()->flash('message',"Anime removed successfully.");
-
+        $anime = Anime::find($request->id);
+        $nameAnime = $anime->name;
+        $anime->seasons->each(function (Season $season) {
+            $season->episodes->each(function (Episode $episode) {
+                $episode->delete();
+            });
+            $season->delete();
+        });
+        $anime->delete();
+        $request->session()->flash('message',
+        "Anime $nameAnime removed successfully."
+        );
         return redirect('/animes');
     }
 }
