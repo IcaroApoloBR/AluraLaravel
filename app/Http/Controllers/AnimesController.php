@@ -7,6 +7,7 @@ use App\Models\Anime;
 use App\Models\Episode;
 use App\Models\Season;
 use App\Services\CreateAnime;
+use App\Services\RemoveAnime;
 use Illuminate\Http\Request;
 
 class AnimesController extends Controller
@@ -39,16 +40,8 @@ class AnimesController extends Controller
         return redirect('/animes');
     }
 
-    public function destroy(Request $request) {
-        $anime = Anime::find($request->id);
-        $nameAnime = $anime->name;
-        $anime->seasons->each(function (Season $season) {
-            $season->episodes->each(function (Episode $episode) {
-                $episode->delete();
-            });
-            $season->delete();
-        });
-        $anime->delete();
+    public function destroy(Request $request, RemoveAnime $removeAnime) {
+        $nameAnime = $removeAnime->removeAnime($request->id);
         $request->session()->flash('message',
         "Anime $nameAnime removed successfully."
         );
