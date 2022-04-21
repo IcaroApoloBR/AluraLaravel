@@ -58,5 +58,22 @@
             nameAnimeEl.hidden = true;
         }
     }
+
+    function editAnime(animeId) {
+        let formData = new FormData();
+        const name = document.querySelector(`#input-name-anime-${animeId} > input`).value;
+        const token = document.querySelector(`input[name="_token"]`).value;
+        formData.append('name', name);
+        formData.append('_token', token);
+
+        const url = `/animes/${animeId}/editarNome`;
+        fetch(url, {
+            method: 'POST',
+            body: formData,
+        }).then(() => {
+            toggleInput(animeId);
+            document.getElementById(`name-anime-${animeId}`).textContent = name;
+        });
+    }
 </script>
 @endsection
