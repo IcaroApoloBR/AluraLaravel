@@ -48,7 +48,7 @@ class AnimesController extends Controller
         return redirect('/animes');
     }
 
-    public function editarNome(int $id, Request $request) {
+    public function editName(int $id, Request $request) {
         $newName = $request->name;
         $anime = Anime::find($id);
         $anime->name = $newName;
