@@ -10,7 +10,7 @@
 </head>
 <body>
     <div class="container">
-        <div class="mt-4 p-5 bg-info text-white rounded mb-4">
+        <div class="mt-4 p-5 bg-danger text-white rounded mb-4">
             <h1 class="d-flex justify-content-center">@yield('title')</h1>
         </div>
 
