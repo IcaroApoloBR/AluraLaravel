@@ -7,11 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Season extends Model
 {
-    public function episodes() {
-        return $this->hasMany(Episode::class);
-    }
+    protected $fillable = ['number'];
+    public $timestamps = false;
 
     public function anime() {
         return $this->belongsTo(Anime::class);
+    }
+
+    public function episodes() {
+        return $this->hasMany(Episode::class);
     }
 }

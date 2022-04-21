@@ -15,7 +15,10 @@ return new class extends Migration
     {
         Schema::create('episodes', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->integer('number');
+            $table->integer('season_id');
+
+            $table->foreign('season_id')->references('id')->on('seasons');
         });
     }
 

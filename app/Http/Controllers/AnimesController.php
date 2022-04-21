@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\AnimesFormRequest;
 use App\Models\Anime;
+use App\Models\Episode;
+use App\Models\Season;
+use App\Services\CreateAnime;
+use App\Services\RemoveAnime;
 use Illuminate\Http\Request;
 
 class AnimesController extends Controller
@@ -21,18 +25,26 @@ class AnimesController extends Controller
         return view('animes.create');
     }
 
-    public function store(AnimesFormRequest $request) {
+    public function store(
+        AnimesFormRequest $request,
+        CreateAnime $createAnime) {
 
-        $anime = Anime::create($request->all());
-        $request->session()->flash('message',"{$anime->name} created successfully .");
+        $anime = $createAnime->createAnime(
+            $request->name,
+            $request->qtd_seasons,
+            $request->episodes_season
+        );
+
+        $request->session()->flash('message',"Anime {$anime->name} with seasons and episodes created successfully .");
 
         return redirect('/animes');
     }
 
-    public function destroy(Request $request) {
-        Anime::destroy($request->id);
-        $request->session()->flash('message',"Anime removed successfully.");
-
+    public function destroy(Request $request, RemoveAnime $removeAnime) {
+        $nameAnime = $removeAnime->removeAnime($request->id);
+        $request->session()->flash('message',
+        "Anime $nameAnime removed successfully."
+        );
         return redirect('/animes');
     }
 }
