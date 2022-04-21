@@ -12,7 +12,7 @@
     </div>
 @endif
 
-    <a href="/animes/criar" class="btn btn-dark mt-2 mb-2">Add Animes to List</a>
+    <a href="/animes/criar" class="btn btn-dark mb-4">Add Animes to List</a>
 
     <ul class="list-group">
         @foreach ($animes as $anime)

@@ -8,7 +8,7 @@
     <ul class="list-group">
         @foreach ($seasons as $season)
             <li class="list-group-item d-flex justify-content-between align-itens-center">
-                <a href="#">
+                <a href="/temporadas/{{ $season->id }}/episodios">
                     Season {{ $season->number }}
                 </a>
                 <span class="badge bg-danger">
