@@ -8,22 +8,27 @@ use Illuminate\Http\Request;
 
 class EpisodesController extends Controller
 {
-    public function index(Season $season) {
+    public function index(Season $season, Request $request) {
         return view('episodes.index', [
             'episodes' => $season->episodes,
-            'seasonId' => $season->id
+            'seasonId' => $season->id,
+            'message' => $request->session()->get('message')
         ]);
     }
 
     public function assisted(Season $season, Request $request) {
         $episodesAssisted = $request->episodes;
         $season->episodes->each(function (Episode $episode)
-        use ($episodesAssisted) {
+        use ($episodesAssisted) 
+        {
             $episode->assisted = in_array(
                 $episode->id,
                 $episodesAssisted
             );
         });
         $season->push();
+        $request->session()->flash('message', 'Episodes marcados como assistidos');
+
+        return redirect()->back();
     }
 }

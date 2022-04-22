@@ -30,7 +30,7 @@
             </div>
 
             <div class="col col-2">
-                <label for="episodes_season">Ep. Season</label>
+                <label for="episodes_season">Episodes</label>
                 <input type="number" class="form-control" name="episodes_season" id="episodes_season">
             </div>
         </div>

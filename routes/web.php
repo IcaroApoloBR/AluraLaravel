@@ -14,4 +14,4 @@ Route::post('/animes/{id}/editarNome', [AnimesController::class, 'editName']);
 Route::get('/animes/{animeId}/temporadas', [SeasonsController::class, 'index']);
 
 Route::get('/temporadas/{season}/episodios', [EpisodesController::class, 'index']);
-Route::get('/temporadas/{{seasonId}}/episodios/assistir', [EpisodesController::class, 'assisted']);
+Route::post('/temporadas/{seasonId}/episodios/assistir', [EpisodesController::class, 'assisted']);

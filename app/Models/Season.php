@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -16,5 +17,11 @@ class Season extends Model
 
     public function episodes() {
         return $this->hasMany(Episode::class);
+    }
+
+    public function getEpisodesAssisted(): Collection {
+        return $this->episodes->filter(function (Episode $episode) {
+            return $episode->assisted;
+        });
     }
 }

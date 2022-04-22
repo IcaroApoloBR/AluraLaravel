@@ -12,7 +12,7 @@
                     Season {{ $season->number }}
                 </a>
                 <span class="badge bg-danger">
-                    0 / {{ $season->episodes->count() }}
+                    {{ $season->getEpisodesAssisted()->count() }} / {{ $season->episodes->count() }}
                 </span>
             </li>
         @endforeach

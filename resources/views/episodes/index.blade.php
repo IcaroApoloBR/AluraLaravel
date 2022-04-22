@@ -5,13 +5,18 @@
 @endsection
 
 @section('content')
-    <form action="/temporadas/{{ $seasonId }}/episodios/assistir" method="post">
+
+@include('message', ['message' => $message])
+
+    <form action="/temporadas/{{ $seasonId }}/episodios/assistir" method="POST">
         @csrf
         <ul class="list-group">
             @foreach($episodes as $episode)
                 <li class="list-group-item d-flex justify-content-between align-itens-center">
                     Episode {{ $episode->number }}
-                    <input type ="checkbox" name="episodes[]" value="{{ $episode->id }}">
+                    <input type ="checkbox" 
+                        name="episodes[{{ $episode->id }}][assisted]" 
+                        {{ $episode->assisted ? 'checked' : '' }}>
                 </li>
             @endforeach
         </ul>

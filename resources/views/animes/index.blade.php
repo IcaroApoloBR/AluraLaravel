@@ -6,11 +6,7 @@
 
 @section('content')
 
-@if(!empty($message))
-    <div class="alert alert-success">
-        {{ $message }}
-    </div>
-@endif
+@include('message', ['message' => $message])
 
     <a href="/animes/criar" class="btn btn-dark mb-4">Add Animes to List</a>
 
