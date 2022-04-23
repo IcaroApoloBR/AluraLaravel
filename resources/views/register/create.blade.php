@@ -23,7 +23,7 @@
     </div>
 
     <button type="submit" class="btn btn-primary mt-3">
-        Sign In
+        Sign Up
     </button>
 </form>
 @endsection
