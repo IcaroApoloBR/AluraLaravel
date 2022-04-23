@@ -11,7 +11,13 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light mb-2 d-flex justify-content-between">
         <a class="navbar-brand" href="{{ route('listAnimes') }}">Home</a>
+        @auth
         <a href="/sair" class="text-danger">Logout</a>
+        @endauth
+
+        @guest
+        <a href="/entrar" class="text-danger">Sign In</a>
+        @endguest
     </nav>
 
     <div class="container">
