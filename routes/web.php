@@ -20,3 +20,5 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/entrar', [App\Http\Controllers\LoginController::class, 'index']);
 Route::post('/entrar', [App\Http\Controllers\LoginController::class, 'login']);
+Route::get('/registrar', [App\Http\Controllers\RegisterController::class, 'create']);
+Route::post('/registrar', [App\Http\Controllers\RegisterController::class, 'store']);
