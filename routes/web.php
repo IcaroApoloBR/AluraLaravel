@@ -3,6 +3,7 @@
 use App\Http\Controllers\AnimesController;
 use App\Http\Controllers\EpisodesController;
 use App\Http\Controllers\SeasonsController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/animes', [AnimesController::class, 'index'])->name('listAnimes');
@@ -22,3 +23,8 @@ Route::get('/entrar', [App\Http\Controllers\LoginController::class, 'index']);
 Route::post('/entrar', [App\Http\Controllers\LoginController::class, 'login']);
 Route::get('/registrar', [App\Http\Controllers\RegisterController::class, 'create']);
 Route::post('/registrar', [App\Http\Controllers\RegisterController::class, 'store']);
+
+Route::get('/sair', function() {
+    Auth::logout();
+    return redirect('/entrar');
+});
