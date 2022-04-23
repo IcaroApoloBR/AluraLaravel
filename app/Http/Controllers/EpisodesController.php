@@ -27,7 +27,7 @@ class EpisodesController extends Controller
             );
         });
         $season->push();
-        $request->session()->flash('message', 'Episodes marcados como assistidos');
+        $request->session()->flash('message', 'Episodes marked as watched');
 
         return redirect()->back();
     }

@@ -5,17 +5,8 @@
 @endsection
 
 @section('content')
-<div>
-    @if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-    @endif
-    
+@include('errors', ['errors' => $errors])
+
     <form method="post">
         @csrf
         <div class="row">
@@ -36,5 +27,4 @@
         </div>
         <button type="submit" class="btn btn-primary mt-2">Add to List</button>
     </form>
-</div>
 @endsection

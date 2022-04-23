@@ -8,7 +8,9 @@
 
 @include('message', ['message' => $message])
 
-    <a href="/animes/criar" class="btn btn-dark mb-4">Add Animes to List</a>
+@auth
+<a href="/animes/criar" class="btn btn-dark mb-4">Add Animes to List</a>
+@endauth
 
     <ul class="list-group">
         @foreach ($animes as $anime)
@@ -26,18 +28,23 @@
                 </div>
                 
                 <span class="d-flex">
+                    @auth
                     <button class="btn btn-info btn-sm m-1" onclick="toggleInput({{ $anime->id }})">
                         <i class="fas fa-edit"></i>
                     </button>
+                    @endauth
+
                     <a href="/animes/{{ $anime->id }}/temporadas" class="btn btn-info btn-sm m-1">
                         <i class="fas fa-external-link-alt"></i>
                     </a>
+                    @auth
                     <form method="post" action="/animes/{{$anime->id}}"
                         onsubmit="return confirm('Are you sure you want to delete?')" >
                         @csrf
                         @method('DELETE')
                         <button class="btn btn-danger btn-sm m-1"><i class="fa-solid fa-trash-can"></i></button>
                     </form>
+                    @endauth
                 </span>
             </li>
         @endforeach

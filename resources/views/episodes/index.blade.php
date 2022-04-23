@@ -15,7 +15,8 @@
                 <li class="list-group-item d-flex justify-content-between align-itens-center">
                     Episode {{ $episode->number }}
                     <input type ="checkbox" 
-                        name="episodes[{{ $episode->id }}][assisted]" 
+                        name="episodes[]"
+                        value="{{ $episode->id }}" 
                         {{ $episode->assisted ? 'checked' : '' }}>
                 </li>
             @endforeach
