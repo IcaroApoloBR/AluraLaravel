@@ -12,6 +12,10 @@ use Illuminate\Http\Request;
 
 class AnimesController extends Controller
 {
+    public function __construct() {
+        $this->middleware('auth');
+    }
+    
     public function index(Request $request) {
 
         $animes = Anime::query()->orderBy('name')->get();
