@@ -6,13 +6,9 @@
 
 @section('content')
 
-@if(!empty($message))
-    <div class="alert alert-success">
-        {{ $message }}
-    </div>
-@endif
+@include('message', ['message' => $message])
 
-    <a href="/animes/criar" class="btn btn-dark mt-2 mb-2">Add Animes to List</a>
+    <a href="/animes/criar" class="btn btn-dark mb-4">Add Animes to List</a>
 
     <ul class="list-group">
         @foreach ($animes as $anime)
@@ -57,6 +53,23 @@
             inputAnimeEl.removeAttribute('hidden');
             nameAnimeEl.hidden = true;
         }
+    }
+
+    function editAnime(animeId) {
+        let formData = new FormData();
+        const name = document.querySelector(`#input-name-anime-${animeId} > input`).value;
+        const token = document.querySelector(`input[name="_token"]`).value;
+        formData.append('name', name);
+        formData.append('_token', token);
+
+        const url = `/animes/${animeId}/editarNome`;
+        fetch(url, {
+            method: 'POST',
+            body: formData,
+        }).then(() => {
+            toggleInput(animeId);
+            document.getElementById(`name-anime-${animeId}`).textContent = name;
+        });
     }
 </script>
 @endsection
