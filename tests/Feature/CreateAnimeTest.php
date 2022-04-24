@@ -10,6 +10,8 @@ use Tests\TestCase;
 
 class CreateAnimeTest extends TestCase
 {
+    use RefreshDatabase;
+    
     public function testCreateAnime()
     {
         $createAnime = new CreateAnime();
