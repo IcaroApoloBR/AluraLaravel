@@ -2,6 +2,9 @@
 # Introduction
 
 The body of your message.
+Anime {{$name}}
+Seasons {{$qtdSeasons}}
+Episodes {{$qtdEpisodes}}
 
 @component('mail::button', ['url' => ''])
 Button Text

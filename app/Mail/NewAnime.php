@@ -11,14 +11,19 @@ class NewAnime extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $name;
+    public $qtdSeasons;
+    public $qtdEpisodes;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($name, $qtdSeasons, $qtdEpisodes)
     {
-        //
+        $this->name = $name;
+        $this->qtdSeasons = $qtdSeasons;
+        $this->qtdEpisodes = $qtdEpisodes;
     }
 
     /**
