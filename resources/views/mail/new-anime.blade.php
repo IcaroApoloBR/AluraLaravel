@@ -1,15 +1,14 @@
 @component('mail::message')
-# Introduction
+# Hello bro, you added a new anime in your list.
 
-The body of your message.
-Anime {{$name}}
-Seasons {{$qtdSeasons}}
-Episodes {{$qtdEpisodes}}
+Anime => {{$name}}<br>
+Seasons => {{$qtdSeasons}}<br>
+Episodes => {{$qtdEpisodes}}
 
 @component('mail::button', ['url' => ''])
-Button Text
+It's a simple Button
 @endcomponent
 
-Thanks,<br>
+Thanks, MyAnimeList clone<br>
 {{ config('app.name') }}
 @endcomponent
