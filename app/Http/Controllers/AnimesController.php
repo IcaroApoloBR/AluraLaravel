@@ -35,6 +35,17 @@ class AnimesController extends Controller
             $request->episodes_season
         );
 
+        $email = new \App\Mail\NewAnime(
+            $request->name,
+            $request->qtd_seasons,
+            $request->episodes_season
+        );
+
+        $email->subject('New anime added to list');
+
+        $user = $request->user();
+        \Illuminate\Support\Facades\Mail::to($user)->send($email);
+
         $request->session()->flash('message',"Anime {$anime->name} with seasons and episodes created successfully .");
 
         return redirect('/animes');
