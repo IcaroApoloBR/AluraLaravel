@@ -6,6 +6,7 @@ use App\Http\Requests\AnimesFormRequest;
 use App\Models\Anime;
 use App\Models\Episode;
 use App\Models\Season;
+use App\Models\User;
 use App\Services\CreateAnime;
 use App\Services\RemoveAnime;
 use Illuminate\Http\Request;
@@ -35,16 +36,19 @@ class AnimesController extends Controller
             $request->episodes_season
         );
 
-        $email = new \App\Mail\NewAnime(
-            $request->name,
-            $request->qtd_seasons,
-            $request->episodes_season
-        );
+        $users = User::all();
+        foreach($users as $user) 
+        {
+            $email = new \App\Mail\NewAnime(
+                $request->name,
+                $request->qtd_seasons,
+                $request->episodes_season
+            );
 
-        $email->subject('New anime added to list');
-
-        $user = $request->user();
-        \Illuminate\Support\Facades\Mail::to($user)->send($email);
+            $email->subject('New anime added to list');
+            \Illuminate\Support\Facades\Mail::to($user)->send($email);
+            sleep(seconds: 5);
+        }
 
         $request->session()->flash('message',"Anime {$anime->name} with seasons and episodes created successfully .");
 
