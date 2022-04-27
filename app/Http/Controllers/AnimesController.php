@@ -46,8 +46,8 @@ class AnimesController extends Controller
             );
 
             $email->subject('New anime added to list');
-            \Illuminate\Support\Facades\Mail::to($user)->send($email);
-            sleep(seconds: 5);
+            \Illuminate\Support\Facades\Mail::to($user)->queue($email);
+            //sleep(seconds: 5);
         }
 
         $request->session()->flash('message',"Anime {$anime->name} with seasons and episodes created successfully .");
