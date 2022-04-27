@@ -37,8 +37,9 @@ class AnimesController extends Controller
         );
 
         $users = User::all();
-        foreach($users as $user) 
+        foreach($users as $index => $user) 
         {
+            $multiple = $index + 1;
             $email = new \App\Mail\NewAnime(
                 $request->name,
                 $request->qtd_seasons,
@@ -46,7 +47,8 @@ class AnimesController extends Controller
             );
 
             $email->subject('New anime added to list');
-            \Illuminate\Support\Facades\Mail::to($user)->queue($email);
+            $when = now()->addSeconds($multiple * 10);
+            \Illuminate\Support\Facades\Mail::to($user)->later($when, $email);
             //sleep(seconds: 5);
         }
 
