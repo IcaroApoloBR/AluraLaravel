@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\NewAnime;
 use App\Http\Requests\AnimesFormRequest;
 use App\Models\Anime;
 use App\Models\Episode;
@@ -36,21 +37,12 @@ class AnimesController extends Controller
             $request->episodes_season
         );
 
-        $users = User::all();
-        foreach($users as $index => $user) 
-        {
-            $multiple = $index + 1;
-            $email = new \App\Mail\NewAnime(
-                $request->name,
-                $request->qtd_seasons,
-                $request->episodes_season
-            );
-
-            $email->subject('New anime added to list');
-            $when = now()->addSeconds($multiple * 10);
-            \Illuminate\Support\Facades\Mail::to($user)->later($when, $email);
-            //sleep(seconds: 5);
-        }
+        $eventNewAnime = new NewAnime(
+            $request->name,
+            $request->qtd_seasons,
+            $request->episodes_season
+        );
+        event($eventNewAnime);
 
         $request->session()->flash('message',"Anime {$anime->name} with seasons and episodes created successfully .");
 
