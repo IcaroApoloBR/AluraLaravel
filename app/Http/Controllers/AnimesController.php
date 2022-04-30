@@ -34,7 +34,8 @@ class AnimesController extends Controller
         $anime = $createAnime->createAnime(
             $request->name,
             $request->qtd_seasons,
-            $request->episodes_season
+            $request->episodes_season,
+            $request->picture
         );
 
         $eventNewAnime = new NewAnime(

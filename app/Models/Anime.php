@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Anime extends Model
 {
     public $timestamps = false;
-    protected $fillable = ['name'];
+    protected $fillable = ['name','picture'];
 
     public function seasons() {
         return $this->hasMany(Season::class);
