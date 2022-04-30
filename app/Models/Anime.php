@@ -16,7 +16,7 @@ class Anime extends Model
         {
             return Storage::url($this->picture);
         }
-        return Storage::url('anime/sem-imagem.jpg');
+        return Storage::url('anime/no-image.jpg');
     }
 
     public function seasons() {
