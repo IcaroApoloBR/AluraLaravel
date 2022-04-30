@@ -6,7 +6,7 @@ use App\Events\NewAnime;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
-class LogNewAnimeAdded
+class LogNewAnimeAdded implements ShouldQueue
 {
     /**
      * Create the event listener.

@@ -7,7 +7,7 @@ use App\Models\User;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
-class SendEmailNewAnimeAdded
+class SendEmailNewAnimeAdded implements ShouldQueue
 {
     /**
      * Create the event listener.
