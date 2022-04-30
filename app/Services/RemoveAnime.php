@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\{Anime, Season, Episode};
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class RemoveAnime {
     public function removeAnime(int $animeId): string {
@@ -14,7 +15,11 @@ class RemoveAnime {
 
             $this->removeSeasons($anime);
             $anime->delete();
+            if($anime->picture){
+                Storage::delete($anime->picture);
+            }
         });
+
         return $nameAnime;
     }
 
