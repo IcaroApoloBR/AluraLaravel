@@ -7,7 +7,7 @@
 @section('content')
 @include('errors', ['errors' => $errors])
 
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
         @csrf
         <div class="row">
             <div class="col col-8">
@@ -28,7 +28,7 @@
         <div class="row">
             <div class="col col-12">
                 <label for="picture">Picture</label>
-                <input type="text" class="form-control" name="picture" id="picture">
+                <input type="file" class="form-control" name="picture" id="picture">
             </div>
         </div>
         <button type="submit" class="btn btn-primary mt-2">Add to List</button>

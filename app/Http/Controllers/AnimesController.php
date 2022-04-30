@@ -30,12 +30,18 @@ class AnimesController extends Controller
     public function store(
         AnimesFormRequest $request,
         CreateAnime $createAnime) {
-
+        
+        $picture = null;
+        if($request->hasFile('picture'))
+        {
+            $picture = $request->file('picture')->store('anime');
+        }
+        
         $anime = $createAnime->createAnime(
             $request->name,
             $request->qtd_seasons,
             $request->episodes_season,
-            $request->picture
+            $picture
         );
 
         $eventNewAnime = new NewAnime(
