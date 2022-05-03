@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Events\DeleteAnime;
 use App\Models\{Anime, Season, Episode};
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -15,9 +16,9 @@ class RemoveAnime {
 
             $this->removeSeasons($anime);
             $anime->delete();
-            if($anime->picture){
-                Storage::delete($anime->picture);
-            }
+
+            $event = new DeleteAnime($anime);
+            event($event);
         });
 
         return $nameAnime;
