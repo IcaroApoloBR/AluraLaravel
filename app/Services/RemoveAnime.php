@@ -12,12 +12,14 @@ class RemoveAnime {
         $nameAnime = '';
         DB::transaction(function () use($animeId, &$nameAnime){
             $anime = Anime::find($animeId);
+            $animeObj = $anime->toArray();
+            dd($anime,$animeObj);
             $nameAnime = $anime->name;
 
             $this->removeSeasons($anime);
             $anime->delete();
 
-            $event = new DeleteAnime($anime);
+            $event = new DeleteAnime($animeObj);
             event($event);
         });
 
