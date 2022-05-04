@@ -13,7 +13,9 @@ use Illuminate\Queue\SerializesModels;
 class DeleteAnime
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
-
+    /**
+     * @var object
+     */
     public $object;
     /**
      * Create a new event instance.

@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Events\DeleteAnime;
+use App\Jobs\DeleteAnimePicture;
 use App\Models\{Anime, Season, Episode};
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -12,8 +13,7 @@ class RemoveAnime {
         $nameAnime = '';
         DB::transaction(function () use($animeId, &$nameAnime){
             $anime = Anime::find($animeId);
-            $animeObj = $anime->toArray();
-            dd($anime,$animeObj);
+            $animeObj = (object) $anime->toArray();
             $nameAnime = $anime->name;
 
             $this->removeSeasons($anime);
@@ -21,6 +21,7 @@ class RemoveAnime {
 
             $event = new DeleteAnime($animeObj);
             event($event);
+            DeleteAnimePicture::dispatch($animeObj);
         });
 
         return $nameAnime;
