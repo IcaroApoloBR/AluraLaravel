@@ -18,6 +18,13 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
+        \App\Events\NewAnime::class => [
+            \App\Listeners\SendEmailNewAnimeAdded::class,
+            \App\Listeners\LogNewAnimeAdded::class,
+        ],
+        \App\Events\DeleteAnime::class => [
+            \App\Listeners\DeleteAnimePicture::class
+        ]
     ];
 
     /**

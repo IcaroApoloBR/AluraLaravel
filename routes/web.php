@@ -29,3 +29,25 @@ Route::get('/sair', function() {
     Auth::logout();
     return redirect('/entrar');
 });
+
+Route::get('/visualizar-email', function() {
+    return new \App\Mail\NewAnime('arrow', 5, 6);
+});
+
+Route::get('/enviar-email', function() {
+    $email = new App\Mail\NewAnime(
+        'Death Note 2',
+        qtdSeasons: 2,
+        qtdEpisodes: 10
+    );
+
+    $email->subject('New anime added to list');
+
+    $user = (object)[
+        'email' => 'icaro@teste.com',
+        'name' => 'Icaro'
+    ];
+
+    \Illuminate\Support\Facades\Mail::to($user)->send($email);
+    return 'Email successfully sent';
+});

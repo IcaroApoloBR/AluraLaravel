@@ -15,7 +15,10 @@
     <ul class="list-group">
         @foreach ($animes as $anime)
             <li class="list-group-item d-flex justify-content-between align-items-center">
-                <span id="name-anime-{{ $anime->id }}">{{ $anime->name }}</span>
+                <div>
+                    <img src="{{$anime->picture_url}}" class="img-thumbnail" height="100px" width="100px"/>
+                    <span id="name-anime-{{ $anime->id }}">{{ $anime->name }}</span>
+                </div>
 
                 <div class="input-group w-50" hidden id="input-name-anime-{{ $anime->id }}">
                     <input type="text" class="form-control" value="{{ $anime->name }}">

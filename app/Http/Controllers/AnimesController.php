@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\NewAnime;
 use App\Http\Requests\AnimesFormRequest;
 use App\Models\Anime;
 use App\Models\Episode;
 use App\Models\Season;
+use App\Models\User;
 use App\Services\CreateAnime;
 use App\Services\RemoveAnime;
 use Illuminate\Http\Request;
@@ -28,12 +30,26 @@ class AnimesController extends Controller
     public function store(
         AnimesFormRequest $request,
         CreateAnime $createAnime) {
-
+        
+        $picture = null;
+        if($request->hasFile('picture'))
+        {
+            $picture = $request->file('picture')->store('anime');
+        }
+        
         $anime = $createAnime->createAnime(
+            $request->name,
+            $request->qtd_seasons,
+            $request->episodes_season,
+            $picture
+        );
+
+        $eventNewAnime = new NewAnime(
             $request->name,
             $request->qtd_seasons,
             $request->episodes_season
         );
+        event($eventNewAnime);
 
         $request->session()->flash('message',"Anime {$anime->name} with seasons and episodes created successfully .");
 
